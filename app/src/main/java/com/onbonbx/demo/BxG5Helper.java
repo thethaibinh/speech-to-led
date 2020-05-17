@@ -17,6 +17,7 @@ import onbon.bx05.area.page.TextBxPage;
 import onbon.bx05.file.ProgramBxFile;
 import onbon.bx05.message.led.ReturnPingStatus;
 import onbon.bx05.series.Bx5G;
+import onbon.bx05.utils.DisplayStyleFactory;
 import onbon.bx05.utils.TextBinary;
 
 public class BxG5Helper {
@@ -69,13 +70,18 @@ public class BxG5Helper {
 
             //
             Bx5GScreenProfile profile = screen.getProfile();
-
+            DisplayStyleFactory.DisplayStyle[] styles = DisplayStyleFactory.getStyles().toArray(new DisplayStyleFactory.DisplayStyle[0]);
             // 创建一个节目
             ProgramBxFile program = new ProgramBxFile(0, profile);
             // 创建一个区域
             TextCaptionBxArea area = new TextCaptionBxArea(0, 0, profile.getWidth(), profile.getHeight(), profile);
             // 创建一个文本页
             TextBxPage tp = new TextBxPage(text);
+            tp.setDisplayStyle(styles[4]);
+            // 调整特技速度
+            tp.setSpeed(4);
+            // 调整停留时间, 单位 10ms
+            tp.setStayTime(0);
             tp.setForeground(Color.red);
             tp.setHorizontalAlignment(TextBinary.Alignment.CENTER);
             tp.setVerticalAlignment(TextBinary.Alignment.CENTER);
